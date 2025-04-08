@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}?v=1.0">
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <h1>Chatbot</h1>
@@ -23,5 +25,22 @@
             <input type="submit" value="send" id="buttonInput">
         </div>
     </div>
+    <script>
+        function getUserResponse() {
+            var userText = $('#textInput').val(); 
+            var userHTML = "<p class='userText'>User: <span>" + userText + "</span></p>";
+            $('#textInput').val(""); 
+            $('#chatbot').append(userHTML);
+            
+            $.get('/blog/getResponse',{userMessage:userText}).done(function(data){
+
+            })
+        }
+    
+        $('#buttonInput').click(function() {
+            getUserResponse();
+        });
+    </script>
+
 </body>
 </html>
